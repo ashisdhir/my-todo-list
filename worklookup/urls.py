@@ -16,12 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from . import views as root_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', auth_views.login, name='login'),
-    path('logout/', auth_views.logout, name='logout'),
-    path('first/', root_views.first, name='first'),
+    path('', include('todolist.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
