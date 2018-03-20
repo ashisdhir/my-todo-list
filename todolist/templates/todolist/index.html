@@ -1,12 +1,8 @@
 {% extends 'todolist/base.html' %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        Hi {{ user.username }}!
-        <a href="{% url 'logout' %}">logout</a>
-    {% else %}
-        <a href="{% url 'login' %}">login</a>
-        <a href="{% url 'signup' %}">Sign up</a>
-    {% endif %}
+    <p>
+        This is a Work to do list site to help users manage the works.
+    </p>
     <hr>
 {% endblock %}
