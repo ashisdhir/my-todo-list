@@ -1,0 +1,12 @@
+{% extends 'todolist/base.html' %}
+
+{% block content %}
+    <h3>Below are the works to do.</h3>
+    {% for x in items %}
+        <div>
+            <p>{{ x.description }} - {{ x.created|date:"D d M Y: H.m" }}</p>
+        </div>
+
+    {% endfor %}
+    <hr>
+{% endblock %}
