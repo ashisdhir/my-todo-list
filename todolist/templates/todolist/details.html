@@ -1,10 +1,13 @@
 {% extends 'todolist/base.html' %}
 
+
+
 {% block content %}
+    <a href="{% url 'todo_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
     <h3>Below are the works to do.</h3>
     {% for x in items %}
         <div>
-            <p>{{ x.description }} - {{ x.created|date:"D d M Y: H.m" }}</p>
+            <p>{{ x.description }} - {{ x.created|date:"D d M Y" }}</p>
         </div>
 
     {% endfor %}

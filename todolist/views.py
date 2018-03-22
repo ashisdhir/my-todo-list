@@ -2,11 +2,29 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, forms
 from .models import todo
 from django.contrib.auth.decorators import login_required
+from .forms import todoNewForm
+from django.utils import timezone
 
 
 # Create your views here.
 def index(request):
     return render(request, 'todolist/index.html')
+
+
+def todo_new(request):
+    if request.method == 'POST':
+        form = todoNewForm(request.POST)
+        if form.is_valid():
+            todo = form.save(commit=False)
+            todo.name = request.user
+            todo.created = timezone.now()
+            todo.save()
+            return redirect('details')
+    else:
+        form = todoNewForm()
+
+    return render(request, 'todolist/todo_edit.html', {'form': form})
+
 
 @login_required()
 def details(request):
