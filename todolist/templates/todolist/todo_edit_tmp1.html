@@ -1,0 +1,27 @@
+{% extends 'todolist/base.html' %}
+
+{% block content %}
+    <form method="post" action=""> {% csrf_token %}
+        <div>
+            <h4><p>Total no of forms: {{ formset.total_form_count  }}</p></h4>
+            {{ formset.management_form }}
+            {% for form in formset  %}
+                <ul>
+                    <p>
+                        <label>title: {{form.title}}</label>
+                        <label>description: {{form.description}}</label>
+                        <label>completed: {{ form.completed }}</label>
+
+                        {% if formset.can_delete %}
+                            <label>delete: {{form.DELETE}} </label>
+                        {% endif %}
+                    </p>
+                </ul>
+            {% endfor %}
+        </div>
+
+        <input type="submit" name="add" value="add">
+        <input type="submit" name="save" value="save">
+
+    </form>
+{% endblock %}

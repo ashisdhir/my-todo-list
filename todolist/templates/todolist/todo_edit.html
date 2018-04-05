@@ -1,9 +1,25 @@
 {% extends 'todolist/base.html' %}
 
 {% block content %}
-    <h1>New todo</h1>
-    <form method="post" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
+
+    <h3>New todo</h3>
+    <form method="post" class="todoNewForm-form">{% csrf_token %}
+        {{ formset.management_form }}
+        {% for form in formset %}
+            {{form.id}}
+            <ul>
+                <li>{{ form.user }}</li>
+                <li>{{ form.title }}</li>
+                <li>{{ form.created }}</li>
+            </ul>
+
+
+        {% endfor %}
+
+
         <button type="submit" class="save btn btn-default">Save</button>
+        <a href="{% url 'details' %}" class="btn btn-default">Cancel</a>
     </form>
+
+
 {% endblock %}

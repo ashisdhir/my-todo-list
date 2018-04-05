@@ -1,0 +1,16 @@
+{% extends 'todolist/base.html' %}
+
+{% block content %}
+    <div>
+        <form method="post" action="">
+            {{ formset.management_form }}
+            {% for form in formset %}
+                {{ form.id }}
+                <ul>
+                    <li>{{ form.description }}</li>
+                    <li>{{ form.completed }}</li>
+                </ul>
+            {% endfor %}
+        </form>
+    </div>
+{% endblock %}

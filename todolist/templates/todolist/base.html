@@ -15,7 +15,7 @@
     {% if user.is_authenticated %}
         <a href="{% url 'details' %}"><h2>Work to do list</h2></a>
     {% else %}
-        <a href="{% url 'index' %}"><h2>Work to do list</h2></a>
+        <a href="{% url 'login' %}"><h2>Work to do list</h2></a>
     {% endif %}
 </head>
 <body>
@@ -23,8 +23,7 @@
         {% if user.is_authenticated %}
             <p class="top-menu">Hello {{ user.username }}<small>(<a href="{% url 'logout' %}">Log out</a>)</small></p>
         {% else %}
-            <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
-            <a href="{% url 'signup' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <a href="{% url 'signup' %}" class="top-menu">Sign up</a>
         {% endif %}
     </div>
     <header>
@@ -37,7 +36,7 @@
     </main>
     <hr>
     <footer>
-        <a href="">This is a test site</a>
+        <a href=""></a>
     </footer>
 </body>
 </html>

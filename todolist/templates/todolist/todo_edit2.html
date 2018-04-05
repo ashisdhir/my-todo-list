@@ -1,0 +1,20 @@
+{% extends 'todolist/base.html' %}
+
+{% block content %}
+
+<form method="post" action='' > {% csrf_token %}
+
+    {{ formset.management_form }}
+    <h3>Tasks todo for: <input type="text" name="title_data" value={{formset.instance}}></h3>
+
+    {% for link_form in formset %}
+        <div>
+            {{ link_form.as_table }}
+        </div>
+    {% endfor %}
+
+    <input type="submit" name="add" value="add">
+    <input type="submit" name="save" value="save">
+    <a href="{% url 'details' %}" class="btn btn-default">Cancel</a>
+</form>
+{% endblock %}
