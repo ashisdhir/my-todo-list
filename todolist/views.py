@@ -86,7 +86,7 @@ def todo_new_tmp2(request, title_id=None):
     title_data = ''
     # title = TodoTitle.objects.get(title='today')
 
-    DetailInlineFormSet = inlineformset_factory(TodoTitle, TodoDetail, can_order=True, fields=('description',), extra=1)
+    DetailInlineFormSet = inlineformset_factory(TodoTitle, TodoDetail, can_order=True, fields=('description', 'completed', ), extra=1)
     if title_id:
         title = TodoTitle.objects.get(id=title_id)
         if request.method == "POST":
@@ -250,21 +250,51 @@ def author_details(request):
 
 
 
+# @login_required()
+# def details(request):
+#     # title_dict = {'today': ['a', 'b'], 'tomo': ['c', 'd']}
+#     title_dict = {}
+#
+#     titles = TodoTitle.objects.filter(user=request.user).order_by('created')[:10]
+#     # print(titles)
+#     for title in titles:
+#         detail_dict = {}
+#         # print(title, title.id)
+#         title_details = TodoDetail.objects.filter(todotitle=title)
+#         print(title_details)
+#         for title_detail in title_details:
+#             print(title_detail, title_detail.id, title_detail.completed)
+#         #     title_detail_obj = TodoDetail.objects.get(title_detail)
+#         #     description = title_detail_obj.description()
+#         #     completed = title_detail_obj.completed()
+#         #     print(description, completed)
+#         # #     detail_dict[description] = completed
+#         title_dict[title] = title_details
+#
+#     return render(request, 'todolist/details.html', {'title_dict': title_dict})
+
+
 @login_required()
 def details(request):
     # title_dict = {'today': ['a', 'b'], 'tomo': ['c', 'd']}
     title_dict = {}
 
     titles = TodoTitle.objects.filter(user=request.user).order_by('created')[:10]
+    # print(titles)
     for title in titles:
         detail_dict = {}
-        title_details = TodoDetail.objects.filter(todotitle = title)
-        # for title_detail in title_details:
+        # print(title, title.id)
+        title_details = TodoDetail.objects.filter(todotitle=title)
+        print(title_details)
+        for title_detail in title_details:
+            print(title_detail, title_detail.id, title_detail.completed)
+            detail_dict[title_detail] = title_detail.completed
         #     title_detail_obj = TodoDetail.objects.get(title_detail)
         #     description = title_detail_obj.description()
         #     completed = title_detail_obj.completed()
-        #     detail_dict[description] = completed
-        title_dict[title] = title_details
+        #     print(description, completed)
+        # #     detail_dict[description] = completed
+        title_dict[title] = detail_dict
 
     return render(request, 'todolist/details.html', {'title_dict': title_dict})
 

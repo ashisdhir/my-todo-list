@@ -1,0 +1,24 @@
+{% extends 'todolist/base.html' %}
+
+
+{% block content %}
+    <a href="{% url 'todo_new' %}" class="top-menu">Add new task</a>
+
+    {% if not title_dict %}
+        <h3>No task to show. Pls add new task.</h3>
+    {% else %}
+        <h3>Below are the works to do.</h3>
+        {% for k,v in title_dict.items %}
+            <div  style="border:1px solid gray;" class="jumbotron">
+                <p>{{ k }}</p>
+                <a href="{% url 'edit' k.id %}" class="top-menu">Edit task</a>
+                <div class="shadowbox">
+                    {% for i in v %}
+                    <input type="checkbox" name="completed" /> {{ i }} <br>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <hr>
+{% endblock %}

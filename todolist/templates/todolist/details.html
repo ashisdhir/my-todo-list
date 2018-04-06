@@ -8,13 +8,19 @@
         <h3>No task to show. Pls add new task.</h3>
     {% else %}
         <h3>Below are the works to do.</h3>
-        {% for k,v in title_dict.items %}
+        {% for title, detail_dict in title_dict.items %}
             <div  style="border:1px solid gray;" class="jumbotron">
-                <p>{{ k }}</p>
-                <a href="{% url 'edit' k.id %}" class="top-menu">Edit task</a>
+                <p>{{ title }}</p>
+                <a href="{% url 'edit' title.id %}" class="top-menu">Edit task</a>
                 <div class="shadowbox">
-                    {% for i in v %}
-                    <input type="checkbox" name="completed" /> {{ i }} <br>
+                    {% for detail, completed_value in detail_dict.items %}
+                        {% if completed_value %}
+                            <input type="checkbox" name="completed" value={{ detail }} checked disabled> {{ detail }}<br>
+                        {% else %}
+                            <input type="checkbox" name="completed" value={{ detail }} disabled> {{ detail }}<br>
+                        {% endif %}
+
+
                     {% endfor %}
                 </div>
             </div>

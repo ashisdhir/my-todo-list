@@ -5,7 +5,7 @@ from django.forms.models import inlineformset_factory
 
 BookFormSet = inlineformset_factory(Author, Book, fields=('title',))
 # TodoDetailFormSet = inlineformset_factory(TodoTitle, TodoDetail, fields=('description', 'completed',))
-TodoDetailFormSet = inlineformset_factory(TodoTitle, TodoDetail, fields=('description',))
+TodoDetailFormSet = inlineformset_factory(TodoTitle, TodoDetail, fields=('description', 'completed',))
 # class TodoNewForm(forms.ModelForm):
 #     class Meta:
 #         model = TodoTitle
