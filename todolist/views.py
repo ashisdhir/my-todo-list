@@ -79,7 +79,6 @@ def manage_books(request):
 
 
 
-title_data = ''
 
 @login_required()
 def todo_new_tmp2(request, title_id=None):
@@ -93,23 +92,14 @@ def todo_new_tmp2(request, title_id=None):
         if request.method == "POST":
             formset = DetailInlineFormSet(request.POST, request.FILES, instance=title)
             if formset.is_valid():
-                if 'title_data' in request.POST:
-                    pass
-                    # print('yes')
-                    # print('title:', title)
-                    # print(request.POST.get('title_data'))
-                    #
-                else:
-                    pass
-                    # print('no')
-
                 if 'add' in request.POST:
                     details_obj = TodoDetail.objects.filter(todotitle=title)
                     details_obj.delete()
                     print(formset.instance)
                     print(request.POST.get('title_data'))
 
-
+                    formset.instance = request.POST.get('title_data')
+                    print(formset.instance)
                     # print(len(formset))
                     form_initial_list = []
                     for form in formset.ordered_forms:
@@ -117,6 +107,7 @@ def todo_new_tmp2(request, title_id=None):
                         form_initial_list.append({'description': description})
                     # print('form_initial_list: ', form_initial_list)
                     formset = DetailInlineFormSet(instance=title, initial=form_initial_list)
+                    # formset = DetailInlineFormSet(instance=request.POST.get('title_data'), initial=form_initial_list)
                     formset.extra += len(form_initial_list)
                     return render(request, 'todolist/todo_edit2.html', {'formset': formset})
 
